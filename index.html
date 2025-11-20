@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="select-date">
+    <button class="select-defore-button btn">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.4953 9.50476L11.6651 4.33032L12.5047 5.16992L8.1745 9.50399L12.5047 13.8303L11.6651 14.6699L6.4953 9.50476Z" fill="#525C69" />
+        </svg>
+    </button>
+
+    <div class="display-date-value">
+        <input class="display-input" >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.58721 1.69828V0.75H5.73837V1.69828H12.2616V0.75H13.4128V1.69828H15.7617L17.25 3.1695V15.7788L15.7617 17.25H2.23833L0.75 15.7788V3.1695L2.23833 1.69828H4.58721ZM4.58721 2.83621H2.71516L1.90116 3.64085V5.82467L2.23833 5.49138H15.7617L16.0988 5.82467V3.64085L15.2848 2.83621H13.4128V3.78448H12.2616V2.83621H5.73837V3.78448H4.58721V2.83621ZM16.0988 7.43395L15.2848 6.62931H2.71516L1.90116 7.43395V15.3074L2.71516 16.1121H15.2848L16.0988 15.3074V7.43395ZM6.69767 9.66379H5.16279V8.52586H6.69767V9.66379ZM9.76744 9.66379H8.23256V8.52586H9.76744V9.66379ZM12.8372 9.66379H11.3023V8.52586H12.8372V9.66379ZM6.69767 11.9397H5.16279V10.8017H6.69767V11.9397ZM9.76744 11.9397H8.23256V10.8017H9.76744V11.9397ZM12.8372 11.9397H11.3023V10.8017H12.8372V11.9397ZM6.69767 14.2155H5.16279V13.0776H6.69767V14.2155ZM9.76744 14.2155H8.23256V13.0776H9.76744V14.2155ZM12.8372 14.2155H11.3023V13.0776H12.8372V14.2155Z" fill="#525C69" />
+        </svg>
+    </div>
+
+    <button class="select-after-button btn">
+
+        <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.0094 5.16516L0.8396 10.3396L0 9.5L4.3302 5.16593L0 0.8396L0.8396 0L6.0094 5.16516Z" fill="#525C69" />
+        </svg>
+    </button>
+</div>
+
+<div class="calendar-wrapper">
+    <div class="calendar-header-date">
+        November 2025
+    </div>
+    <div class="line"></div>
+
+    <div class="calendar-container-select">
+    <div class="calendar-select-month">  <button class="select-defore-button btn">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.4953 9.50476L11.6651 4.33032L12.5047 5.16992L8.1745 9.50399L12.5047 13.8303L11.6651 14.6699L6.4953 9.50476Z" fill="#525C69" />
+        </svg>
+    </button>November <button class="select-after-button btn">
+
+        <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.0094 5.16516L0.8396 10.3396L0 9.5L4.3302 5.16593L0 0.8396L0.8396 0L6.0094 5.16516Z" fill="#525C69" />
+        </svg>
+    </button></div>
+    <div class="calendar-select-year">2025</div>
+    </div>
+</div>
+</body>
+</html>
+
+<script type="module" src="index.js"></script>
+<script type="module" src="CalendarLogic.js"></script>
