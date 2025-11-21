@@ -1,26 +1,28 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.select-date{
+.select-date {
     display: flex;
     justify-content: space-between;
 }
 
+/*
 .select-defore-button, .select-after-button{
     display: flex;
     align-items: center;
 }
+*/
 
-.btn{
+.btn, .btn-in-calendar {
     all: unset;
     cursor: pointer;
     border-radius: 9999px;
@@ -31,8 +33,11 @@ body{
     align-items: center;
     justify-content: center;
 }
+.btn-in-calendar{
+    background: #fff;
+}
 
-.select-date{
+.select-date {
     border-radius: 9999px;
     padding: 4px;
     min-height: 33px;
@@ -40,7 +45,7 @@ body{
     max-width: 300px;
 }
 
-.display-input{
+.display-input {
     all: unset;
     cursor: pointer;
 }
@@ -57,8 +62,6 @@ body{
     flex-direction: column;
     border-radius: 12px;
     padding: 24px;
-    width: 332px;
-    height: 376px;
     box-shadow: 2px 2px 9px 2px rgba(50, 42, 42, 0.09);
     background: #fff;
     margin-left: 10px;
@@ -72,6 +75,8 @@ body{
     font-weight: 600;
     font-size: 16px;
     color: #525c69;
+    display: flex;
+    gap: 3px;
 }
 
 .line {
@@ -80,9 +85,10 @@ body{
     background: #525c69;
 }
 
-.calendar-container-select{
+.calendar-container-select, .calendar-buttons-select{
     display: flex;
     gap: 12px;
+
 }
 
 .calendar-select-month{
@@ -93,6 +99,11 @@ body{
     background: #d9e8f7;
     display: flex;
     gap: 13px;
+    justify-content: space-between;
+}
+
+.calendar-buttons-select{
+    flex-direction: row;
 }
 
 .calendar-select-year {
@@ -103,4 +114,79 @@ body{
     padding: 15px;
     height: 40px;
     background: #eff2f4;
+    gap: 4px;
+}
+
+.daysWeek{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    gap: 5px;
+}
+
+/*.render-content{*/
+/*    display: grid;*/
+/*    text-align: center;*/
+/*    grid-template-columns: repeat(7, 1fr);*/
+/*    gap: 5px;*/
+/*    font-size: 14px;*/
+/*}*/
+
+/* для дней */
+.render-content.render-content--days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 колонок - недели */
+    gap: 6px;
+}
+
+/* для месяцев */
+.render-content.render-content--months {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 x 4 сетка */
+    gap: 8px;
+}
+
+.display-list-months{
+    border-radius: 9999px;
+    padding: 14px 10px;
+    text-align: center;
+}
+
+.display-list-months:hover{
+    transition:  ease-in-out 0.3s;
+    background: #0063c6;
+    cursor: pointer;
+    color: #fff;
+}
+/*#0063c6*/
+.calendar-day, .cur-active-calendar-day{
+    padding: 10px;
+    border-radius: 9999px;
+}
+
+.cur-active-calendar-day, .cur-active-calendar-month{
+    color: #fff;
+    background: #0063c6;
+    cursor: pointer;
+}
+
+.calendar-day:hover{
+    transition:  ease-in-out 0.3s;
+    background: #0063c6;
+    cursor: pointer;
+    color: #fff;
+}
+
+.month-button{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    cursor: pointer;
+}
+.disabled{
+    color: #d7d9db;
+}
+
+.active{
+    color: #525c69;
 }

@@ -4,38 +4,67 @@ export default class CalendarLogic {
     date = new Date();
     year = this.date.getFullYear();
     monthN = this.date.getMonth();
-    moths = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+    months = [
+        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь",
     ];
     days = [];
 
     // Устанавливаем текущую дату
-    setDay(value = new Date()){
+    setDay(value = new Date()) {
         this.date = value;
         this.year = this.date.getFullYear();
         this.monthN = this.date.getMonth();
     }
 
-    // Возвращаем текущую дату месяца
-    getDay(){
-        return this.date.getDay();
+    setMonth(idx){
+       if(idx<0 || idx>11) throw new RangeError('Некорректный месяц');
+       this.monthN = idx
+       this.date = new Date(this.year, idx, 1);
+       this.generateDays();
     }
 
-    getArrMonths(){
-        const nameM = this.moths[this.monthN]
-        return nameM
+    // Возвращаем текущий день месяца
+    getDay() {
+        return this.date.getDate();
     }
-    generateDays(){
+
+    prevMonth(){
+        this.monthN -=1;
+        if(this.monthN <0){this.monthN = 11; this.year -=1}
+        this.date = new Date(this.year, this.monthN,1);
+        this.generateDays();
+    }
+
+    nextMonth(){
+        this.monthN +=1;
+        if(this.monthN>11){this.year = 0; this.monthN +=1}
+        this.date = new Date(this.year, this.monthN, 1);
+        this.generateDays();
+    }
+
+    // Текущий месяц
+    getCurMonths(numM = this.monthN) {
+        return this.months[numM];
+    }
+
+    // Генерируем страницу календаря
+    generateDays() {
         this.days = [];
 
-        const prevMonthStart = new Date(this.year, this.monthN, 0).getDate();
-        const prevMonthEnd = new Date(this.year, this.monthN, 0).getDate();
+        const prevMonthEndDay = new Date(this.year, this.monthN, 0).getDay(); // день недели по счёту на котором закончился прошлый месяц // кол-во ячеек необходимое занять днями прошлого месяца в зависимости от того какой конечный день недели
+        const prevMonthEndNumber = new Date(this.year, this.monthN, 0).getDate(); // Последний день прошлого месяца
         const curMonthEnd = new Date(this.year, this.monthN + 1, 0).getDate();
-        console.log('prevMonthStart:', prevMonthStart);
-        console.log('prevMonthEnd:', prevMonthEnd);
-        console.log('curMonthEnd:', curMonthEnd);
-        return {curMonthEnd, prevMonthEnd, prevMonthStart};
+
+        for (let i = prevMonthEndDay; i > 0; i--) {
+            this.days.push({"num": prevMonthEndNumber - i + 1, "disabled": true}); // days last month
+        }
+        for (let i = 1; i <= curMonthEnd; i++) {
+            this.days.push({"num": i, "disabled": false});
+        }
+        for (let i = 1; this.days.length < 42; i++) {
+            this.days.push({"num": i, "disabled": true});
+        }
 
     }
 }
