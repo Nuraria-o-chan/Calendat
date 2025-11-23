@@ -17,6 +17,26 @@ export default class CalendarLogic {
         this.monthN = this.date.getMonth();
     }
 
+    getCurDate(){
+        const curDay = this.getDay();
+        const curMonth = this.monthN +1;
+        const curYear = this.year;
+        const formattedNumber = curDay + "." + curMonth + "." + curYear;
+        return formattedNumber;
+    }
+
+    setYear(year) {
+        this.year = year;
+        this.date = new Date(this.year, this.monthN, 1);
+        this.generateDays();
+    }
+
+    getYearsRange(start, count = 12) {
+        const arr = [];
+        for (let i = 0; i < count; i++) arr.push(start + i);
+        return arr;
+    }
+
     setMonth(idx){
        if(idx<0 || idx>11) throw new RangeError('Некорректный месяц');
        this.monthN = idx
@@ -38,7 +58,7 @@ export default class CalendarLogic {
 
     nextMonth(){
         this.monthN +=1;
-        if(this.monthN>11){this.year = 0; this.monthN +=1}
+        if (this.monthN > 11) { this.monthN = 0; this.year += 1; };
         this.date = new Date(this.year, this.monthN, 1);
         this.generateDays();
     }

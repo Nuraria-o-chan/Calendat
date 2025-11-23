@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const displayBlock = document.querySelector(".display-date-value");
 
     const calendar = new CalendarElement("calendar-popup");
+    const displayCurDateInput = document.querySelector(".display-input");
+    displayCurDateInput.value =  calendar.curDate;
+    console.log(calendar.curDate)
 
     displayBlock.addEventListener("click", (e) => {
         e.stopPropagation();

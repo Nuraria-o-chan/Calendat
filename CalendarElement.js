@@ -7,6 +7,8 @@ export class CalendarElement {
     rootElement;
     renderContainer;
     displayDayHeader;
+    yearsStart;
+    curDate;
 
     // displayInsideMonth;
     // displayMonthHeader;
@@ -16,6 +18,8 @@ export class CalendarElement {
     constructor(uniqueId) {
         this.uniqueId = uniqueId;
         this.calendar.generateDays();
+        this.yearsStart = this.calendar.year - 6;
+        this.curDate = this.calendar.getCurDate();
 
         this.rootElement = this.createMakeUpCalendar();
 
@@ -154,11 +158,94 @@ export class CalendarElement {
 
         })
 
+        const yearButton = wrapper.querySelector(".calendar-select-year");
+        yearButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            const week = wrapper.querySelector(".daysWeek");
+            week.style.display = "none";
+            this.renderYears();
+        })
+
 
 
 
 
         return wrapper;
+    }
+
+    renderYears() {
+        this.renderContainer.classList.remove('render-content--days', 'render-content--months');
+        this.renderContainer.classList.add('render-content--years');
+        this.renderContainer.innerHTML = '';
+
+        // Нав-бар лет
+        const nav = document.createElement('div');
+        nav.className = 'years-nav';
+
+        const prev = document.createElement('button');
+        prev.type = 'button';
+        prev.className = 'years-prev';
+        prev.textContent = '←';
+
+        const title = document.createElement('div');
+        title.className = 'years-title';
+        title.textContent = `${this.yearsStart}–${this.yearsStart + 11}`;
+
+        const next = document.createElement('button');
+        next.type = 'button';
+        next.className = 'years-next';
+        next.textContent = '→';
+
+        nav.append(prev, title, next);
+        this.renderContainer.appendChild(nav);
+
+        // Сетка лет 3x4
+        const grid = document.createElement('div');
+        grid.className = 'years-grid';
+
+        this.calendar.getYearsRange(this.yearsStart, 12).forEach((y) => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'year-item';
+            btn.textContent = String(y);
+            btn.dataset.year = String(y);
+            if (y === this.calendar.year) btn.classList.add('selected');
+            grid.appendChild(btn);
+        });
+
+        this.renderContainer.appendChild(grid);
+
+        // Хендлеры пагинации
+        prev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.yearsStart -= 12;
+            this.renderYears();
+        });
+        next.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.yearsStart += 12;
+            this.renderYears();
+        });
+
+        // Выбор года
+        grid.addEventListener('click', (e) => {
+            const el = e.target.closest('.year-item');
+            if (!el) return;
+            e.stopPropagation();
+
+            const y = Number(el.dataset.year);
+            if (Number.isNaN(y)) return;
+
+            this.calendar.setYear(y);
+            this.getYear();
+            this.getMonth();
+
+            const week = this.rootElement.querySelector(".daysWeek");
+            if (week) week.style.display = "grid";
+
+            this.renderDays(); // сразу возвращаемся к дням выбранного года/месяца
+        });
     }
 
     updateHeaderAndDays(){
